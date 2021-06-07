@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        h1{
+            text-align: center;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            font-weight: 900;
+            color:rgb(42, 116, 103)
+        }
+        #form{
+            text-align: center;
+            
+        }
+    </style>
+</head>
+<body>
+    <h1>Login Form</h1>
+    <form id="form">
+        Name:<br><input type="text" name="fname" id="username" required></br>
+        Password:<br><input type="password" name="fpass" id="password" required></br>
+        <button onclick="login(event)">Login</button>
+    </form>
+</body>
+</html>
+<script>
+let users = localStorage.getItem('users');
+
+if(localStorage.getItem('users') == null){
+    localStorage.setItem('users',JSON.stringify(users));
+}
+
+function login(e){
+    e.preventDefault();
+    let form = document.getElementById('form')
+
+    let username = form.username.value;
+    let password = form.password.value;
+
+
+    let users = JSON.parse(localStorage.getItem('users'));
+
+    let count = 0;
+
+    for(i = 0; i < users.length; i++){
+        if(users[i].name == username && users[i].pass == password){
+            window.location='menu.html';
+            count++;
+            break;
+        }
+    }
+
+    if(count == 0){
+        alert("Check Your Input")
+    }
+}
+</script>

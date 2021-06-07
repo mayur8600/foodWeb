@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>signUp</title>
+    <style>
+        .container{
+            width: 30%;
+            margin: 50px auto;
+        }
+        #name, #email, #phone, #pass{
+            width: 200px;
+            height: 20px;
+            border-radius: 5px;
+        }
+        .but{
+            margin-top:20px;
+            width: 100px;
+            height:30px;
+            border-radius: 10px;
+            background-color:aqua;
+            cursor: pointer;
+        }
+        .but:hover{
+            background-color:royalblue;
+            color:white;
+            transition: 0.5s;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+    <h1>Fill the form for registration</h1>
+    <form name="myform" onsubmit="store(event)">
+        Name:<br><input type="text" name="fname" id="name" placeholder="Enter your name" required></br>
+        Email:<br><input type="email" name="femail" id="email" placeholder="Enter your email" required></br>
+        Phone:<br><input type="text" name="fphone" id="phone" placeholder="Enter your phone number" required></br>
+        Password:<br><input type="password" name="fpass" id="pass" placeholder="Enter your password" required></br>
+        <input class="but" type="submit" value="Submit">
+    </form>
+</div>
+</body>
+</html>
+<script>
+    function store(e){
+        e.preventDefault();
+        let name = document.getElementById('name').value;
+        let email = document.getElementById('email').value;
+        let phone = document.getElementById('phone').value;
+        let pass = document.getElementById('pass').value;
+
+        let data = {name,email,phone,pass};
+        console.log(data)
+
+        localStore(data)
+    }
+    function localStore(data){
+        let users = JSON.parse(localStorage.getItem('users') || "[]");
+        let user = data;
+        users.push(user);
+
+        localStorage.setItem('users',JSON.stringify(users));
+
+    }
+</script>
